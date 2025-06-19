@@ -1,0 +1,75 @@
+
+project:
+  type: book
+
+book:
+  title: "Hands-On Machine Learning with R (2e)"
+  output-file: "homlr"
+  author: "Bradley Boehmke and Brandon Greenwell"
+  date: today
+
+  page-footer:
+    left: |
+      Hands-On Machine Learning with R (2e) was written by Bradley Boehmke and Brandon Greenwell.
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+  cover-image: cover.jpg
+  favicon: cover.jpg
+  site-url: https://koalaverse.github.io/homlr2/
+  repo-url: https://github.com/koalaverse/homlr2/
+  repo-branch: main
+  repo-actions: [edit, issue]
+
+  chapters:
+    - index.qmd
+
+    - part: part1-foundations.qmd
+      chapters:
+        - introduction.qmd
+        - workflow.qmd
+        - engineering.qmd
+
+    - part: part2-supervised.qmd
+      chapters:
+        - linear.qmd
+        - regularization.qmd
+        - glassbox.qmd
+        - nonlinear.qmd
+        - trees.qmd
+        - boosting.qmd
+        - stacking.qmd
+        - deeplearning.qmd
+
+    - part: part3-advanced.qmd
+      chapters:
+        - unsupervised.qmd
+        - posthoc.qmd
+        - causal.qmd
+        - text.qmd
+        - timeseries.qmd
+        - survival.qmd
+
+    - part: part4-production.qmd
+      chapters:
+        - mlops.qmd
+        - ethics.qmd
+
+    - part: part5-appendices.qmd
+      chapters:
+        - appendix-setup.qmd
+        - appendix-tidymodels.qmd
+
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: krantz
+    keep-tex: true
+    include-in-header: latex/preamble.tex
+    include-before-body: latex/before_body.tex
+    include-after-body: latex/after_body.tex
+

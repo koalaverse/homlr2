@@ -1,0 +1,22 @@
+
+# Preface {.unnumbered .unlisted}
+
+This is a Quarto book.
+
+
+## Software conventions {.unnumbered}
+
+```{r}
+1 + 1
+```
+
+To learn more about Quarto books visit <https://quarto.org/docs/books>.
+
+
+## Acknowledgments {.unnumbered}
+
+Blah, blah, blah...
+
+
+\mainmatter
+
