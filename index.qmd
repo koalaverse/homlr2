@@ -1,7 +1,7 @@
 
 # Preface {.unnumbered .unlisted}
 
-This is a Quarto book.
+This is a Quarto book. Here's a reference to @knuth84.
 
 
 ## Software conventions {.unnumbered}
