@@ -1,1 +1,1 @@
-# (PART II) Supervised Learning Algorithms {- #sec-supervised .unnumbered}
+# Supervised Learning Algorithms {- #sec-supervised .unnumbered}

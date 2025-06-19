@@ -1,1 +1,1 @@
-# (PART I) Foundations of the Machine Learning Process {- #sec-foundations .unnumbered}
+# Foundations of the Machine Learning Process {- #sec-foundations .unnumbered}
