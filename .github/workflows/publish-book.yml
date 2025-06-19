@@ -34,20 +34,10 @@ jobs:
       - name: Install R packages
         uses: r-lib/actions/setup-r-dependencies@v2
 
-      - name: Install keras and tensorflow
-        run: |
-          library(keras)
-          install_keras(envname = "r-reticulate")
-        shell: Rscript {0}
-
-      - name: Install webshot dependency
-        run: webshot::install_phantomjs()
-        shell: Rscript {0}
-
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
-          path: book
+          path: _book
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
