@@ -9,35 +9,58 @@ on:
     # run every day at 11 PM
     - cron: '0 23 * * *'
 
-name: Render and publish book
+name: build_book.yaml
+
+env:
+  isExtPR: ${{ github.event.pull_request.head.repo.fork == true }}
+  RUST_BACKTRACE: 1
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           # To install LaTeX to build PDF book
           tinytex: true
+          # uncomment below and fill to pin a version
+          # version: 0.9.105
 
-      - name: Install R
-        uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-r@v2
         with:
-          r-version: '4.2.0'
+          use-public-rspm: true
 
-      - name: Install R packages
-        uses: r-lib/actions/setup-r-dependencies@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2
 
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
+      - name: Render book to all format
+        # Add any command line argument needed
+        run: |
+          quarto render
+
+      - name: Upload website artifact
+        if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
+        uses: actions/upload-pages-artifact@v3
         with:
-          target: gh-pages
-          path: _book
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: "_book"
+
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
